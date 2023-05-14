@@ -1,24 +1,24 @@
-import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/bloc/bloc.dart';
+import 'package:clean_architecture_tdd/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/src/provider.dart';
 
 class TriviaControls extends StatefulWidget {
   const TriviaControls({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
-  _TriviaControlsState createState() => _TriviaControlsState();
+  State<TriviaControls> createState() => _TriviaControlsState();
 }
 
 class _TriviaControlsState extends State<TriviaControls> {
   final controller = TextEditingController();
-  String inputStr;
+  late String inputStr;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
+      children: [
         TextField(
           controller: controller,
           keyboardType: TextInputType.number,
@@ -29,26 +29,27 @@ class _TriviaControlsState extends State<TriviaControls> {
           onChanged: (value) {
             inputStr = value;
           },
-          onSubmitted: (_) {
-            dispatchConcrete();
+          onSubmitted:  (_) {
+            addConcrete();
           },
         ),
         SizedBox(height: 10),
         Row(
-          children: <Widget>[
+          children: [
             Expanded(
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text('Search'),
-                color: Theme.of(context).accentColor,
-                textTheme: ButtonTextTheme.primary,
-                onPressed: dispatchConcrete,
+                onPressed: addConcrete,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
-              child: RaisedButton(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.grey.shade500,
+                ),
                 child: Text('Get random trivia'),
-                onPressed: dispatchRandom,
+                onPressed: addRandom,
               ),
             ),
           ],
@@ -57,14 +58,13 @@ class _TriviaControlsState extends State<TriviaControls> {
     );
   }
 
-  void dispatchConcrete() {
+  void addConcrete() {
     controller.clear();
-    BlocProvider.of<NumberTriviaBloc>(context)
-        .add(GetTriviaForConcreteNumber(inputStr));
+    context.read<NumberTriviaBloc>().add(GetTriviaForConcreteNumber(inputStr));
   }
 
-  void dispatchRandom() {
+  void addRandom() {
     controller.clear();
-    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
+    context.read<NumberTriviaBloc>().add(GetTriviaForRandomNumber());
   }
 }

@@ -1,15 +1,15 @@
-import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
-
-import '../../../../core/error/failures.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/network_info.dart';
-import '../../domain/entities/number_trivia.dart';
-import '../../domain/repositories/number_trivia_repository.dart';
-import '../datasources/number_trivia_local_data_source.dart';
+import '../datasources/number_trivia_local_data_soucre.dart';
 import '../datasources/number_trivia_remote_data_source.dart';
+import '../models/number_trivia_model.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../../../../core/error/failures.dart';
 
-typedef Future<NumberTrivia> _ConcreteOrRandomChooser();
+import '../../domain/respositories/number_trivia_repository.dart';
+import 'package:dartz/dartz.dart';
+
+typedef Future<NumberTriviaModel> _ConcreteOrRandomChooser();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NumberTriviaRemoteDataSource remoteDataSource;
@@ -17,17 +17,16 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NetworkInfo networkInfo;
 
   NumberTriviaRepositoryImpl({
-    @required this.remoteDataSource,
-    @required this.localDataSource,
-    @required this.networkInfo,
+    required this.remoteDataSource,
+    required this.localDataSource,
+    required this.networkInfo,
   });
 
   @override
   Future<Either<Failure, NumberTrivia>> getConcreteNumberTrivia(
-    int number,
-  ) async {
+      int number) async {
     return await _getTrivia(() {
-      return remoteDataSource.getConcreteNumberTrivia(number);
+      return remoteDataSource.getConcreteNumberTrivia(number)!;
     });
   }
 
@@ -39,8 +38,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   }
 
   Future<Either<Failure, NumberTrivia>> _getTrivia(
-    _ConcreteOrRandomChooser getConcreteOrRandom,
-  ) async {
+      _ConcreteOrRandomChooser getConcreteOrRandom) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteTrivia = await getConcreteOrRandom();
@@ -52,7 +50,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
     } else {
       try {
         final localTrivia = await localDataSource.getLastNumberTrivia();
-        return Right(localTrivia);
+        return Right(localTrivia!);
       } on CacheException {
         return Left(CacheFailure());
       }

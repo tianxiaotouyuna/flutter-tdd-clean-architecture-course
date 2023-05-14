@@ -1,20 +1,17 @@
-# TDD Clean Architecture for Flutter
+# clean_architecture_tdd Reso Coder (Null-safety)
 
-### The whole accompanying tutorial series is available at :point_right: [this link](https://resocoder.com/flutter-clean-architecture-tdd/) :point_left:.
+(Null-safety) This is a Number Trivia app example using clean architecture TDD and flutter_bloc 7.3.0
 
-#### _Find more tutorials on [resocoder.com](https://resocoder.com)_
+## Getting Started
 
-<br />
+This project is a starting point for a Flutter application.
 
-<h3 align="center">Architecture Proposal</h3>
+A few resources to get you started if this is your first Flutter project:
 
-<br />
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-<img src="./architecture-proposal.png" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
-
-<br />
-<br />
-
-[![Reso Coder](https://resocoder.com/wp-content/uploads/2019/09/logo_with_text_signature.png)](https://resocoder.com)
-<br />
-_Be prepared for **real** app development_
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+# clean_architecture_TDD

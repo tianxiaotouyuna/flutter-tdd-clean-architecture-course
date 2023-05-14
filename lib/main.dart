@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
+import 'features/number_trivia/domain/entities/number_trivia.dart';
 import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
+
 import 'injection_container.dart' as di;
+import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,9 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Number Trivia',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.green.shade800,
-        accentColor: Colors.green.shade600,
+        primarySwatch: Colors.green,
       ),
       home: NumberTriviaPage(),
     );

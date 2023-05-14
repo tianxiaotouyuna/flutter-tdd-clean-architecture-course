@@ -1,32 +1,31 @@
-name: clean_architecture_tdd_course
-description: TDD Clean Architecture for Flutter
+name: clean_architecture_tdd
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.6.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  bloc_test: ^9.1.1
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
-  # Service locator
-  get_it: ^3.1.0
-  # Bloc for state management
-  flutter_bloc: ^3.0.0
-  # Value equality
-  equatable: ^1.0.1
-  # Functional programming thingies
-  dartz: ^0.8.9
-  # Remote API
-  data_connection_checker: ^0.3.4
-  http: ^0.12.0+3
-  # Local cache
-  shared_preferences: ^0.5.6
+  flutter_bloc: ^8.1.2
+  get_it: ^7.2.0
+  http: ^0.13.3
+  internet_connection_checker: ^1.0.0+1
+  shared_preferences: ^2.0.8
 
 dev_dependencies:
+  build_runner: ^2.1.2
   flutter_test:
     sdk: flutter
-  mockito: ^4.1.1
+  mockito: ^5.0.16
 
 flutter:
   uses-material-design: true
